@@ -1,0 +1,61 @@
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+  font-family: 'Roboto Slab', "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h1.quail-front {
+  font-size: 70px;
+  margin-bottom: 30px;
+}
+
+.lead.big-lead {
+  font-size: 30px;
+}
+
+.logo {
+  height: 200px;
+  margin: 70px auto 0 auto;
+  display: block;
+}
+
+.quail-result { padding: 3px; border-radius: 3px;}
+  .quail-result.severe { border: 3px dashed red; }
+  .quail-result.moderate { border: 3px dashed orange; }
+  .quail-result.reccomendation { border: 3px solid green; }
+
+
+.well h3 {
+  margin-top: 0;
+}
+
+.navbar.navbar-quail {
+  border-radius: 0;
+  border: 0;
+  background: #1DA582;
+}
+
+.navbar.navbar-quail .navbar-nav>li>a, .navbar-quail.navbar-default .navbar-brand {
+  color: #fff;
+}
+
+.navbar .navbar-brand {
+  font-size: 38px;
+}
+
+.download a {
+  margin-bottom: 10px;
+}
+
+.quail-message { padding: 4px; border-radius: 2px; background: #d8b3b3; }
+
+textarea#help, .modal textarea {
+  font-family: 'Andale Mono', monospace;
+  min-height: 200px;
+}
+
+.edit-text .glyphicon {
+  margin-right: 8px;
+}
+
+.extra-space {
+  margin-top: 40px;
+}

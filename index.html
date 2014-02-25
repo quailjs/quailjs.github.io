@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Quail</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <script type="text/x-handlebars">
+    <nav class="navbar navbar-default navbar-quail" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">quail</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li>{{#link-to 'accessibilityTests'}}Accessibility tests{{/link-to}}</li>
+          <li>{{#link-to 'guidelines'}}Guidelines{{/link-to}}</li>
+          <li><a href="http://quail.readthedocs.org" target="_blank">Documentation <span class="sr-only">Opens new window</span></a></li>
+          <li>{{#link-to 'examples'}}Examples{{/link-to}}</li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container" role="main" aria-live="polite">
+      {{outlet}}
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" id="index">
+    <div class="row">
+        <div class="col-md-6">
+          <h1 class="quail-front">quail</h1>
+          <p class="lead big-lead">
+            Accessibility testing in the browser and on the server.
+          </p>
+          <p><strong><a href="https://medium.com/p/c1a3a275fe1a">Read the announcement about the future of Quail</a>.</strong></p>
+          <p class="download">
+            <a href="http://github.com/kevee/quail" class="btn btn-info btn-lg">
+              Visit us on GitHub
+            </a>
+            <a href="https://github.com/kevee/quail/releases" class="btn btn-success btn-lg">
+              Download QUAIL
+            </a>
+          </p>
+          <p><strong>Use Drupal?</strong> Check out the <a href="http://drupal.org/project/accessibility">Accessibility module</a>, or watch and read the <a href="https://archive.org/details/BakeAccessibilityIntoYourProject">2013 BADCamp presentation</a> on using quail in your site.
+          </p>
+        </div>
+        <div class="col-md-6 hidden-sm hidden-xs">
+          <img class="logo" alt="" src="/img/quail.png">
+        </div>
+    </div>
+    <div class="row extra-space">
+        <div class="col-md-6">
+        <p class="lead">
+          <abbr title="Quail Accessibility Information Library">QUAIL</abbr> is a jQuery plugin for checking content against accessibility guidelines. It provides a flexible way to test for certain problems (say, images missing an alt text) and a collection of over <strong>200</strong> tests to get you started. Defining your own tests is easy, and you can pick-and-choose tests to focus on the needs of your own app.
+        </p>
+        <p>QUAIL has just made a big move from a humble PHP library to a lightweight and powerful client-side accessibility checker. You can <a href="http://code.google.com/p/quail-lib">still find the 1.0 version of QUAIL</a>, or <strong><a href="http://github.com/kevee/quail">check out the future of QUAIL</a></strong>.
+        </p>
+          <a name="documentation"></a>
+          <h2>Get project announcements</h2>
+          <div id="mc_embed_signup">
+    <form action="http://kevee.us3.list-manage.com/subscribe/post?u=9eed24c6f4f4c06dbb3fa55ab&amp;id=8d2e570c7e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div class="mc-field-group form-group">
+      <label for="mce-EMAIL">Email Address (require)</label>
+      <input type="email" value="" name="EMAIL" class="required form-control email" id="mce-EMAIL">
+    </div>
+      <div id="mce-responses" class="clear">
+        <div class="response" id="mce-error-response" style="display:none"></div>
+        <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+        <div style="position: absolute; left: -5000px;"><input type="text" name="b_9eed24c6f4f4c06dbb3fa55ab_8d2e570c7e" value=""></div>
+      <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button btn btn-primary"></div>
+    </form>
+    </div>
+
+        </div>
+        <div class="col-md-6">
+          <div class="well">
+            <div class="demonstration">
+              <h3>Demonstration</h3>
+              <p>There are several accessibility problems in here, but QUAIL will find them.</p>
+              <p><img src="/img/demo.png"></p>
+            </div>
+            <h3>The code</h3>
+            <pre><code>$('.demonstration').quail({
+     jsonPath : '/js/quail/src/resources', 
+     guideline : [ 'imgHasAlt',
+                   'documentAbbrIsUsed'
+                 ],
+       testFailed : function(event) {
+        ...code to highlight problems...
+      }});</code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <em>Many thanks to <a href="https://twitter.com/caliparesse">Leslie Kavasch</a> for the quail pictures.</em>
+      </div>
+  </script>
+
+  <script type="text/x-handlebars" id="examples">
+    <h1>Examples</h1>
+    <p class="lead">
+      The following examples can all be found in the <code>examples</code> folder of quail. All examples open a new window:
+    </p>
+    <ul>
+      <li><a href="/examples/simple.html">Simple example</a></li>
+      <li><a href="http://drupala11y.org/content/accessibility-module-demonstration">Integration with a CMS (Drupal)</a></li>
+      <li><a href="/examples/aloha.html">Aloha editor</a></li>
+    </ul>
+  </script>
+
+  <script type="text/x-handlebars" id="accessibilityTests">
+    <div class="page-header">
+      <h1>Accessibility tests</h1>
+    </div>
+    <p class="lead">
+      Each accessibility test is either a simple selector or a complex JavaScript callback which checks document structure and content clarity. Below is a list of all tests and their related documentation.
+    </p>
+    <p>
+    Tests are entirely optional, they are turned on and off by using a {{#link-to 'guidelines'}}default guideline{{/link-to}}, or you can build your own guideline with as many tests as you wish.
+    </p>
+    <table id="tests" class="table table-striped" aria-live="polite">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>QUAIL Name</th>
+          <th>Tags</th>
+          <th>Severity</th>
+          <th>Guidelines</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each test in model}}
+          <tr>
+            <td>{{#link-to 'accessibilityTest' test}}{{test.title.en}}{{/link-to}}</td>
+            <td>{{test.id}}</td>
+            <td>{{test.tags}}</td>
+            <td>{{{test.severity}}}</td>
+            <td>{{test.guidelineLabels}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </script>
+
+  <script type="text/x-handlebars" id="accessibilityTest">
+    <div class="page-header">
+    <h1>{{ title.en }}</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Test information</h2>
+      <p class="lead">{{ description.en }}</p>
+      <dl class="dl-horizontal">
+        <dt>Quail name</dt>
+        <dd><code>{{ id }}</code></dd>
+        <dt>Test type</dt>
+        <dd><code>{{ type }}</code></dd>
+        {{#if selector }}
+          <dt>Selector</dt>
+          <dd><code>{{ selector }}</code></dd>
+        {{/if}}
+        {{#if callback }}
+          <dt>Custom callback</dt>
+          <dd><code>{{ callback }}</code></dd>
+        {{/if}}
+      </dl>
+      <h2>Guidelines</h2>
+      {{#unless guidelines }}
+        <div class="alert alert-danger"><strong>No guidelines mapped</strong></div>
+      {{/unless}}
+      {{#if guidelines.wcag }}
+        <h3>{{#link-to 'guidelinesWcag'}}WCAG 2.0{{/link-to}}</h3>
+      <ul>
+      {{#each guidelines.wcag}}
+        <li>{{ id }} - Technique {{ technique }}</li>
+      {{/each}}
+      </ul>
+      {{/if}}
+      {{!--
+        {{#if reviewed }}
+        <div class="alert alert-info"><strong>Test reviewed</strong> Someone has re-written the description of this test.</div>
+      {{else}}
+        <h2>Help this test out</h2>
+        <form>
+          <div class="form-group">
+            <label for="help">This test needs an updated title and description. Provide one below (HTML OK):</label>
+            <textarea id="help" class="form-control">{{ title.en }}
+-----
+
+{{description.en}}
+</textarea>
+          </div>
+          <div class="form-group">
+            <input type="submit" value="Help out this test" class="btn btn-primary"/>
+          </div>
+        </form>
+      {{/if}}
+      --}}
+    </div>
+    <div class="col-md-6">
+      <h2>Raw JSON</h2>
+      <pre id="raw"><code>{{{ raw }}}</code></pre>
+    </div>
+  </div>
+  </script>
+
+  <script type="text/x-handlebars" id="guidelines">
+    <div class="page-header">
+      <h1>Accessibility guidelines</h1>
+    </div>
+    <p class="lead">
+      QUAIL tests can be aligned with one or more accessibility guideline, and 
+    </p>
+    <p>
+      <ul>
+        <li>{{#link-to 'guidelinesWcag'}}WCAG 2.0{{/link-to}}</li>
+        <li>{{#link-to 'guidelines508'}}United States Section 508{{/link-to}}</li>
+      </ul>
+    </p>
+  </script>
+
+  <script type="text/x-handlebars" id="guidelinesWcag">
+    <div class="page-header">
+      <h1>WCAG 2.0</h1>
+    </div>
+    <p class="lead">
+    Since quail tests usually target specific elements on a page, multiple tests are used in combination to meet techniques laid out in <a href="http://www.w3.org/TR/WCAG20/">WCAG 2.0</a>. We are actively working on filling out the gaps in test coverage for WCAG.
+    </p>
+    {{#each guideline in model}}
+      <h3 class="extra-space"><a href="{{guideline.uri}}">{{guideline.id}}</a>: {{guideline.description}}</h3>
+      <table class="table table-striped" id="guideline">
+        <thead>
+          <th>Number</th>
+          <th>Technique</th>
+          <th>QUAIL Tests</th>
+        </thead>
+        <tbody>
+          {{#each technique in guideline.techniques}}
+            <tr>
+              <td><strong>{{technique.id}}</strong></td>
+              <td>{{technique.description}}</td>
+              <td>
+                {{#if technique.tests}}
+                  <ul>
+                    {{#each test in technique.tests}}
+                      <li>{{#link-to 'accessibilityTest' test}}{{test.id}}{{/link-to}}
+                    {{/each}}
+                  </ul>
+                {{else}}
+                  <strong>No tests defined.</strong>
+                {{/if}}
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{/each}}
+  </script>
+
+  <script type="text/x-handlebars" id="guidelines508">
+    <div class="page-header">
+      <h1>Section 508</h1>
+    </div>
+    <p class="lead">
+    <a href="http://www.section508.gov/">Section 508</a> is still the baseline standard for many state and federal institutions in the United States.
+    </p>
+    <table class="table table-striped" id="guideline">
+      <thead>
+        <th>Letter</th>
+        <th>Section</th>
+        <th>QUAIL Tests</th>
+      </thead>
+      <tbody>
+        {{#each guideline in model }}
+          <tr>
+            <td><strong>{{guideline.id}}</strong></td>
+            <td>{{guideline.title}}</td>
+            <td>
+              <ul>
+                {{#each test in guideline.tests }}
+                  <li>{{#link-to 'accessibilityTest' test}}{{test.id}}{{/link-to}}</li>
+                {{/each}}
+              </ul>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </script>
+
+  <script src="js/libs/jquery-1.10.2.js"></script>
+  <script src="js/libs/handlebars-1.1.2.js"></script>
+  <script src="js/libs/ember-1.4.0.js"></script>
+
+  <script src="js/app.js"></script>
+  <script src="/dist/quail.jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39098526-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</body>
+</html>

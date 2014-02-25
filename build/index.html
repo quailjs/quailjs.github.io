@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Quail</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-quail" role="navigation">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/">quail</a>
+		</div>
+
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="/#accessibility-tests">Accessibility tests</a>
+				</li>
+				<li><a href="/#guidelines">Guidelines</a></li>
+				<li>
+					<a href="http://quail.readthedocs.org" target="_blank">
+						Documentation
+						<span class="sr-only">Opens new window</span>
+					</a>
+				</li>
+				<li><a href="/#examples">Examples</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container" role="main" aria-live="polite">
+		<div class="page-header">
+			<h1>Build your own quail</h1>
+		</div>
+
+		<p class="lead">
+			Quail comes with over
+			<a href="/tests">200 tests</a>
+			, but you probably don't want to run all of them at once. Here you can add or remove tests, customize feedback, and download only the components you need for your site.
+		</p>
+		<form id="builder">
+			<div class="row">
+				<div class="col-md-10" id="builder-tests" aria-live="polite">
+					<div class="form-inline">
+						<!--<div class="form-group">
+						<label class="sr-only" for="search">Search</label>
+						<input type="email" class="form-control" id="search" placeholder="Search"></div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" class="guideline" value="wcag" checked="checked">WCAG 2.0</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" class="guideline" value="508" checked="checked">Section 508</label>
+					</div>
+					-->
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="sticky">
+					<div class="form-group">
+						<button type="submit" id="download" class="btn btn-primary">Download JavaScript</button>
+					</div>
+					<div class="form-group">
+						<button type="button" id="download-config" class="btn btn-info">Download Configuration</button>
+					</div>
+					<div class="form-group">
+						<button type="button" id="download-link" class="btn btn-info">Create permalink</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<script id="builder-message" type="text/x-handlebars-template">
+	<div class="alert alert-dismissable alert-{{type}}" id="current-message">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		{{{message}}}
+	</div>
+</script>
+	<script id="builder-template" type="text/x-handlebars-template">
+	<table class="test-table table table-striped">
+		<thead>
+			<tr>
+				<th><span class="sr-only">Select</span></th>
+				<th>Test name</th>
+				<th>Edit message</th>
+				<th>Guidelines</th>
+				<th>Severity</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each tests}}
+				<tr id="{{template.name}}-row">
+					<td>
+						<input type="checkbox" id="{{template.name}}"/>
+					</td>
+					<td>
+						<p><label for="{{template.name}}">{{title.en}}</label></p>
+							<p class="description">{{description.en}}</p>
+					</td>
+					<td>
+						<a href="#{{template.name}}" class="edit-text btn btn-sm btn-info" data-test="{{template.name}}">Edit message</a
+					</td>
+					<td>
+						{{#if template.guidelines }}
+							{{#each template.guidelines }}
+								<h6>{{name}}</h6>
+								<ul class="list-unstyled">
+									{{#if wcag }}
+										{{#each sc }}
+											<li> <strong>{{sc}}:</strong> 
+												{{#each technique}}
+													{{this}}
+												{{/each}}
+											</li>
+										{{/each}}
+									{{else}}
+										{{#each sections}}
+											<li>{{this}}</li>
+										{{/each}}
+									{{/if}}
+								</ul>
+							{{/each}}
+						{{/if}}
+					</td>
+					<td>
+						<span class="label label-{{template.severity.class}}">{{template.severity.name}}</span>
+					</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</script>
+	<script id="builder-modal" type="text/x-handlebars-template">
+<div class="modal fade" id="builder-modal-display">
+  <div class="modal-dialog">
+    <form>
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title">{{test.title.en}}</h4>
+	      </div>
+	      <div class="modal-body">
+	        	<div class="form-group">
+					    <label for="title">Test title</label>
+					    <input type="text" class="form-control" id="modal-title" value="{{test.title.en}}"></div>
+	        	<div class="form-group">
+					    <label for="content">Test content</label>
+					    <textarea type="textarea" class="form-control" id="modal-content">{{test.description.en}}</textarea>
+					  </div>
+					  <input type="hidden" id="modal-test" value="{{testName}}"/>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="submit" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div>
+    </form>
+  </div>
+</div>
+</script>
+
+</div>
+<script src="../js/libs/jquery-1.10.2.js"></script>
+<script src="../js/libs/handlebars-1.1.2.js"></script>
+<script src="../js/libs/filesaver.js"></script>
+<script src="build.js"></script>
+
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39098526-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</body>
+</html>

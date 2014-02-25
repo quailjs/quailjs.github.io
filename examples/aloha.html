@@ -1,0 +1,61 @@
+<!DOCTYPE>
+<html>
+        <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <title>Aloha Editor Example</title>
+        <link rel="stylesheet" href="wysiwyg/editors/aloha/aloha/css/aloha.css" type="text/css">
+        <link rel="stylesheet" href="wysiwyg/editors/aloha/aloha/demo/simple/index.css" type="text/css">
+        <link rel="stylesheet" href="/css/quailjs.css"/>
+        </head>
+        <body>
+        <div id="main">
+         <div id="content"><p>Here is a picture of quail I drew on a white board:</p>
+                <p>
+                  <img src="/img/demo.png">
+                </p>
+                <p>
+                  I should really use an ABBR tag in this paragraph because QUAIL is an acronym.
+                </p>
+                </div>
+        </div>
+        
+		    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		    <script src="//webprojects.csumb.edu/quail/mirror.php?p=kevee/quail/master/src/quail.min.js"></script>
+		    <script src="wysiwyg/editors/aloha/aloha/lib/require.js"></script>
+        <script src="wysiwyg/editors/aloha/aloha/lib/aloha.js" data-aloha-plugins="common/ui,common/format,common/highlighteditables,common/link,extra/quail"></script>
+        <script type="text/javascript">
+         Aloha.settings.quail = {
+           tests : {
+        "imgHasAlt": {
+            "type": "selector",
+            "selector": "img:not(img[alt])",
+            "severity": "severe",
+            "title" : "This image is missing an alt text."
+        },      
+        "documentAbbrIsUsed": {
+            "type": "custom",
+            "callback": "documentAbbrIsUsed",
+            "severity": "moderate",
+            "title" : "You need to add an abbreviation tag here."
+        },
+     },
+     guideline : [ 'imgHasAlt', 'documentAbbrIsUsed' ],
+     path : '../../src/resources',
+     baseUrl : '../../src/wysiwyg_plugins/',
+     title : function(event) {
+       if(event.testName == 'documentAbbrIsUsed') {
+         return 'The acronym ' + event.options.acronym + ' needs to be within an acronym tag.';
+       }
+       if(event.testName == 'imgHasAlt') {
+         return 'This image is missing a description. To add a description, select the image and click the image button.';
+       }
+     }
+         }
+         
+         Aloha.ready( function() { 
+     Aloha.jQuery('#content').aloha();        
+         });
+
+  </script>
+        </body>
+</html>
