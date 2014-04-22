@@ -12,8 +12,8 @@ h1.quail-front {
 }
 
 .logo {
-  height: 200px;
-  margin: 70px auto 0 auto;
+  height: 350px;
+  margin: 10px auto 0 auto;
   display: block;
 }
 
@@ -30,7 +30,7 @@ h1.quail-front {
 .navbar.navbar-quail {
   border-radius: 0;
   border: 0;
-  background: #1DA582;
+  background: #39679F;
 }
 
 .navbar.navbar-quail .navbar-nav>li>a, .navbar-quail.navbar-default .navbar-brand {
